@@ -19,6 +19,11 @@ audio, and recording options. RET starts scrcpy. The menu also stops/restarts
 sessions, shows output, copies commands, and inspects displays/encoders/cameras.
 Multiple devices can have independent sessions.
 
+Like Magit, parameter keys begin with `-`: for example, `-s` selects the
+device serial, `-F` toggles fullscreen, and `-r` sets the recording path.
+Action keys remain unprefixed (`RET` start, `x` stop, `X` restart). These
+menu keys do not change the scrcpy command-line arguments.
+
 Set `android-scrcpy-program` for an explicit scrcpy executable and
 `android-scrcpy-extra-arguments` for options absent from the menu. Device
 completion uses android-adb. Scrcpy subprocesses receive the same adb executable

@@ -313,61 +313,61 @@ Interactively, use the current values from `android-scrcpy'."
 (transient-define-prefix android-scrcpy ()
   "Configure, start, and manage scrcpy."
   [["Connection"
-    ("s" "Device serial" "--serial="
+    ("-s" "Device serial" "--serial="
      :reader android-scrcpy--read-device)
-    ("u" "Select USB device" "--select-usb")
-    ("e" "Select TCP/IP device" "--select-tcpip")
-    ("t" "Connect over TCP/IP" "--tcpip=")
-    ("i" "Display id" "--display-id=")]
+    ("-u" "Select USB device" "--select-usb")
+    ("-e" "Select TCP/IP device" "--select-tcpip")
+    ("-t" "Connect over TCP/IP" "--tcpip=")
+    ("-i" "Display id" "--display-id=")]
    ["Video"
-    ("m" "Maximum size" "--max-size=")
-    ("f" "Maximum FPS" "--max-fps=")
-    ("b" "Video bit rate" "--video-bit-rate=")
-    ("v" "Video codec" "--video-codec="
+    ("-m" "Maximum size" "--max-size=")
+    ("-f" "Maximum FPS" "--max-fps=")
+    ("-b" "Video bit rate" "--video-bit-rate=")
+    ("-v" "Video codec" "--video-codec="
      :choices ("h264" "h265" "av1" "raw"))
-    ("c" "Crop" "--crop=")
-    ("o" "Capture orientation" "--capture-orientation="
+    ("-c" "Crop" "--crop=")
+    ("-o" "Capture orientation" "--capture-orientation="
      :choices ("0" "90" "180" "270"
                "flip0" "flip90" "flip180" "flip270"))]
    ["Window"
-    ("F" "Fullscreen" "--fullscreen")
-    ("a" "Always on top" "--always-on-top")
-    ("B" "Borderless" "--window-borderless")
-    ("d" "Disable screensaver" "--disable-screensaver")
-    ("W" "No window" "--no-window")
-    ("l" "Window title" "--window-title=")]]
+    ("-F" "Fullscreen" "--fullscreen")
+    ("-a" "Always on top" "--always-on-top")
+    ("-B" "Borderless" "--window-borderless")
+    ("-d" "Disable screensaver" "--disable-screensaver")
+    ("-W" "No window" "--no-window")
+    ("-l" "Window title" "--window-title=")]]
   [["Control and input"
-    ("C" "No control" "--no-control")
-    ("S" "Turn screen off" "--turn-screen-off")
-    ("k" "Stay awake" "--stay-awake")
-    ("K" "Keep active" "--keep-active")
-    ("p" "Power off on close" "--power-off-on-close")
-    ("h" "Show touches" "--show-touches")
-    ("q" "Keyboard mode" "--keyboard="
+    ("-C" "No control" "--no-control")
+    ("-S" "Turn screen off" "--turn-screen-off")
+    ("-k" "Stay awake" "--stay-awake")
+    ("-K" "Keep active" "--keep-active")
+    ("-p" "Power off on close" "--power-off-on-close")
+    ("-h" "Show touches" "--show-touches")
+    ("-q" "Keyboard mode" "--keyboard="
      :choices ("disabled" "sdk" "uhid" "aoa"))
-    ("M" "Mouse mode" "--mouse="
+    ("-M" "Mouse mode" "--mouse="
      :choices ("disabled" "sdk" "uhid" "aoa"))]
    ["Audio"
-    ("A" "Disable audio" "--no-audio")
-    ("j" "Audio source" "--audio-source="
+    ("-A" "Disable audio" "--no-audio")
+    ("-j" "Audio source" "--audio-source="
      :choices ("output" "playback" "mic" "mic-unprocessed"
                "mic-camcorder" "mic-voice-recognition"
                "mic-voice-communication" "voice-call"
                "voice-call-uplink" "voice-call-downlink"
                "voice-performance"))
-    ("J" "Audio codec" "--audio-codec="
+    ("-J" "Audio codec" "--audio-codec="
      :choices ("opus" "aac" "flac" "raw"))
-    ("g" "Audio bit rate" "--audio-bit-rate=")
-    ("y" "Duplicate audio" "--audio-dup")]
+    ("-g" "Audio bit rate" "--audio-bit-rate=")
+    ("-y" "Duplicate audio" "--audio-dup")]
    ["Recording"
-    ("r" "Record to file" "--record="
+    ("-r" "Record to file" "--record="
      :reader android-scrcpy--read-record-file)
-    ("R" "Record format" "--record-format="
+    ("-R" "Record format" "--record-format="
      :choices ("mp4" "mkv" "m4a" "mka" "opus" "aac" "flac" "wav"))
-    ("N" "No playback" "--no-playback")
-    ("V" "No video playback" "--no-video-playback")
-    ("O" "No audio playback" "--no-audio-playback")
-    ("L" "Time limit" "--time-limit=")]]
+    ("-N" "No playback" "--no-playback")
+    ("-V" "No video playback" "--no-video-playback")
+    ("-O" "No audio playback" "--no-audio-playback")
+    ("-L" "Time limit" "--time-limit=")]]
   [["Actions"
     ("RET" "Start" android-scrcpy-start)
     ("x" "Stop" android-scrcpy-stop)

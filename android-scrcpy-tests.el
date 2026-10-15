@@ -96,6 +96,50 @@
         (when (process-live-p process) (delete-process process))
         (when (buffer-live-p buffer) (kill-buffer buffer))))))
 
+(ert-deftest android-scrcpy-transient-separates-arguments-from-actions ()
+  "Use Magit-style parameter keys without changing action bindings."
+  (let (keys (arguments 0) (actions 0))
+    (cl-labels
+        ((walk (node)
+           (cond
+            ((vectorp node) (mapc #'walk (aref node 2)))
+            ((consp node)
+             (let* ((properties (cdr node))
+                    (key (plist-get properties :key))
+                    (argument (plist-get properties :argument)))
+               (should-not (member key keys))
+               (push key keys)
+               (if argument
+                   (progn
+                     (cl-incf arguments)
+                     (should (string-prefix-p "-" key))
+                     (should (string-prefix-p "--" argument)))
+                 (cl-incf actions)
+                 (should-not (string-prefix-p "-" key))))))))
+      (walk (get 'android-scrcpy 'transient--layout)))
+    (should (= arguments 36))
+    (should (= actions 9)))
+  (dolist (entry '(("-s" . "--serial=")
+                   ("-F" . "--fullscreen")
+                   ("-r" . "--record=")))
+    (should (equal (plist-get (cdr (transient-get-suffix
+                                   'android-scrcpy (car entry)))
+                             :argument)
+                   (cdr entry))))
+  (dolist (entry '(("RET" . android-scrcpy-start)
+                   ("x" . android-scrcpy-stop)
+                   ("X" . android-scrcpy-restart)
+                   ("z" . android-scrcpy-show-output)
+                   ("w" . android-scrcpy-copy-command)
+                   ("?" . android-scrcpy-version)
+                   ("D" . android-scrcpy-list-displays)
+                   ("E" . android-scrcpy-list-encoders)
+                   ("I" . android-scrcpy-list-cameras)))
+    (should (eq (plist-get (cdr (transient-get-suffix
+                                'android-scrcpy (car entry)))
+                          :command)
+                (cdr entry)))))
+
 (provide 'android-scrcpy-tests)
 
 ;;; android-scrcpy-tests.el ends here
